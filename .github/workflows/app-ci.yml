@@ -20,3 +20,8 @@ jobs:
         run: chmod +x ./mvnw
       - name: Run Tests
         run: make test
+      - name: send default message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
