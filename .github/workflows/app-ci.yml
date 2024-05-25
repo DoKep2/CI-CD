@@ -27,7 +27,9 @@ jobs:
         run: |
           grep -R "FAILURE" target/surefire-reports/*.txt > failed-tests.txt || true
           if [ -s failed-tests.txt ]; then
-            echo "failed_tests=$(cat failed-tests.txt)<<EOF" >> $GITHUB_OUTPUT
+            echo "failed_tests<<EOF" >> $GITHUB_OUTPUT
+            echo $(cat failed-tests.txt) >> $GITHUB_OUTPUT
+            echo 'EOF' >> $GITHUB_OUTPUT
           else
             echo "failed_tests=No failed tests found." >> $GITHUB_OUTPUT
           fi
