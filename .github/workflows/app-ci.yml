@@ -27,7 +27,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          run: |
+          message: |
             echo "Displaying failed tests:"
             for file in $(find target/surefire-reports -name '*.txt'); do
               echo "File: $file"
