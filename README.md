@@ -1,4 +1,4 @@
-![Build Status](https://github.com/DoKep2/CI-CD/tree/master/.github/workflows/app-ci.yml/badge.svg)
+![Build Status](https://github.com/DoKep2/CI-CD/actions/workflows/app-ci.yml/badge.svg)
 
 ## Функционал
 - В CicdApplication.java реализованы методы:
