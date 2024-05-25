@@ -21,18 +21,24 @@ jobs:
       - name: Run Tests
         run: make test
 
+      - name: Collect failed tests
+        if: failure()
+        id: collect-failed-tests
+        run: |
+          grep -R "FAILURE" target/surefire-reports/*.txt > failed-tests.txt || true
+          if [ -s failed-tests.txt ]; then
+            echo "::set-output name=failed_tests::$(cat failed-tests.txt)"
+          else
+            echo "::set-output name=failed_tests::No failed tests found."
+          fi
+
       - name: send fail message
         if: failure()
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            echo "Displaying failed tests:"
-            for file in $(find target/surefire-reports -name '*.txt'); do
-              echo "File: $file"
-              grep -B 5 -A 10 "FAILURE" $file
-            done
+          message: ${{ steps.collect-failed-tests.outputs.failed_tests }}
 
       - name: send ok message
         uses: appleboy/telegram-action@master
