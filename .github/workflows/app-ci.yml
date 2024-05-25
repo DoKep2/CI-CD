@@ -20,7 +20,21 @@ jobs:
         run: chmod +x ./mvnw
       - name: Run Tests
         run: make test
-      - name: send default message
+
+      - name: send fail message
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          run: |
+            echo "Displaying failed tests:"
+            for file in $(find target/surefire-reports -name '*.txt'); do
+              echo "File: $file"
+              grep -B 5 -A 10 "FAILURE" $file
+            done
+
+      - name: send ok message
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
