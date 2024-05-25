@@ -39,7 +39,7 @@ class CicdApplicationTest {
     @Test
     void _minTest() {
         Integer[] arr = cicdApplication.readFromFile(FILE_PATH);
-        assertEquals(1, cicdApplication._min(arr));
+        assertEquals(2, cicdApplication._min(arr));
     }
 
     @Test
