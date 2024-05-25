@@ -28,7 +28,7 @@ class CicdApplicationTest {
     @Test
     void readFromFileTest() {
         Integer[] arr = cicdApplication.readFromFile(FILE_PATH);
-        assertEquals(5, arr.length);
+        assertEquals(6, arr.length);
         assertEquals(1, arr[0]);
         assertEquals(2, arr[1]);
         assertEquals(3, arr[2]);
