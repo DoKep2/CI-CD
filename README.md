@@ -1,3 +1,5 @@
+![Build Status](https://github.com/DoKep2/CI-CD/tree/master/.github/workflows/app-ci/badge.svg)
+
 ## Функционал
 - В CicdApplication.java реализованы методы:
 - `public Integer[] readFromFile(String fileName)` - метод для чтения данных из файла
