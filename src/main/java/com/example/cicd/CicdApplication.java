@@ -1,7 +1,13 @@
 package com.example.cicd;
 
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+import org.knowm.xchart.XYChartBuilder;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CicdApplication {
@@ -20,6 +26,7 @@ public class CicdApplication {
         }
         return null;
     }
+
     public int _min(Integer[] arr) {
         int min = arr[0];
         for (int i = 1; i < arr.length; i++) {
@@ -54,5 +61,29 @@ public class CicdApplication {
             mul *= integer;
         }
         return mul;
+    }
+
+    public static void buildGraph() {
+        CicdApplication cicdApplication = new CicdApplication();
+        List<Integer> sizes = new ArrayList<>();
+        List<Long> times = new ArrayList<>();
+        for (int i = 1; i <= 1000000; i *= 10) {
+            Integer[] arr = new Integer[i];
+            for (int j = 0; j < i; j++) {
+                arr[j] = j + 1;
+            }
+            long start = System.currentTimeMillis();
+            cicdApplication._mult(arr);
+            long end = System.currentTimeMillis();
+            sizes.add(i);
+            times.add(end - start);
+        }
+        XYChart chart = new XYChartBuilder().width(800).height(600).title("Mult").xAxisTitle("Size").yAxisTitle("Time, millis").build();
+        chart.addSeries("Mult", sizes, times);
+        new SwingWrapper<>(chart).displayChart();
+    }
+
+    public static void main(String[] args) {
+        buildGraph();
     }
 }
